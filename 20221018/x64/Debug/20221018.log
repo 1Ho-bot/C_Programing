@@ -1,0 +1,5 @@
+﻿  Main.c
+C:\Users\user\Desktop\20221018\Main.c(25,47): warning C4047: '=': 'FILE *'의 간접 참조 수준이 'int'과(와) 다릅니다.
+C:\Users\user\Desktop\20221018\Main.c(31,60): warning C4047: '!=': 'size_t'의 간접 참조 수준이 'void *'과(와) 다릅니다.
+C:\Users\user\Desktop\20221018\Main.c(53,4): warning C4013: 'exit'이(가) 정의되지 않았습니다. extern은 int형을 반환하는 것으로 간주합니다.
+  20221018.vcxproj -> C:\Users\user\Desktop\20221018\x64\Debug\20221018.exe
