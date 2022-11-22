@@ -1,0 +1,92 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct student {
+	int s_num;
+	float score;
+	struct student* next;
+}STUDENT;
+
+STUDENT* CreateNode(int s_num, float score);
+STUDENT* AppendNode(STUDENT* head, STUDENT* cur);
+void OutputNode(STUDENT* head);
+
+int main() {
+	STUDENT* head = NULL;
+	STUDENT* cur;
+	int s_num = 0, select = 0;
+	float score = 0;
+	while (1) {
+		printf("성적 관리 프로그램입니다. 원하시는 작업을 입력해주세요.");
+		printf(" (1) 학생 추가 (2) 학생 삭제 (3) 학생 출력\n>>> ");
+		scanf("%d", &select);
+		switch (select) {
+		case 1:
+			printf("학생의 학번 성적을 입력해주세요\n>>> ");
+			scanf("%d %f", &s_num, &score);
+			cur = CreateNode(s_num, score);
+			if (cur == NULL) {
+				printf("동적 메모리 생성 실패");
+				exit(1);
+			}
+			head = AppendNode(head, cur);
+			break;
+		case 2:
+
+			break;
+		case 3:
+			OutputNode(head);
+			break;
+		}
+	}
+	return 0;
+}
+
+STUDENT* CreateNode(int s_num, float score) {
+	STUDENT* node;
+	node = (STUDENT*)malloc(sizeof(STUDENT));
+	if (node == NULL) {
+		printf("동적 메모리 생성 실패");
+		exit(1);
+	}
+	node->s_num = s_num;
+	node->score = score;
+	node->next = NULL;
+	return node;
+}
+
+STUDENT* AppendNode(STUDENT* head, STUDENT* cur) {
+	STUDENT* nextNode = head;
+	STUDENT* temp = NULL;
+	if (head == NULL) {
+		head = cur;
+		return head;
+	}
+	while (cur->score < nextNode->score) {
+		if (nextNode->next != NULL) {
+			temp = nextNode;
+			nextNode = nextNode->next;
+		}
+		else {
+			nextNode->next = cur;
+			return head;
+		}
+	}
+	cur->next = nextNode;
+	if (temp != NULL) temp->next = cur;
+	else head = cur;
+
+	return head;
+}
+
+void OutputNode(STUDENT* head) {
+	STUDENT* tempNode = head;
+	STUDENT* deleteTemp = NULL;
+	while (tempNode != NULL) {
+		printf("%d 학생의 점수는 %f점 입니다.\n", tempNode->s_num, tempNode->score);
+		deleteTemp = tempNode;
+		tempNode = tempNode->next;
+		//free(deleteTemp);
+	}
+}
