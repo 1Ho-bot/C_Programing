@@ -1,0 +1,49 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include<stdio.h>
+
+typedef struct ROOM {
+	int isEmpty_person;
+	char entryRoomDate[50];
+}ROOM;
+
+void EntryRoom(ROOM *room_list);
+int main() {
+	ROOM room_list[50];
+	int selcetAction = 0;
+	for (int i = 0; i < sizeof(room_list) / sizeof(ROOM); i++) room_list[i].isEmpty_person = 0;
+	printf("펜션 관리 프로그램. 원하시는 작업을 선택해주세요\n");
+	printf("1.투숙 방 선택 2.퇴실");
+	scanf("%d", &selcetAction);
+	switch (selcetAction) {
+	case 1:
+		EntryRoom(room_list);
+		break;
+
+	case 2:
+		break;
+	default:
+		printf("잘못된 명령입니다.");
+		break;
+	}
+}
+
+void EntryRoom(ROOM* room_list) {
+	int roomNumber = 1, entry_person = 0;
+	
+	printf("투숙하실 인원을 입력해주세요 : ");
+	scanf("%d", &entry_person);
+	
+	
+
+	printf("원하시는 방 번호를 입력해주세요 (1~ 50): ");
+	do {
+		scanf("%d", &roomNumber);
+	} while (roomNumber < 1 && roomNumber > 50);
+	if (room_list[roomNumber - 1].isEmpty_person != 0) {
+		printf("방에 사람이 있습니다.");
+	}
+	else {
+		printf("투숙이 가능합니다. 투숙하실 인원을 입력해주세요 : ");
+		scanf("%d", &room_list[roomNumber - 1].isEmpty_person);
+	}
+}
